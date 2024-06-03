@@ -1,0 +1,84 @@
+  $primary_color:#04AA6D;
+  $motion_effect:0.4s;
+  body {
+    display: flex;
+    justify-content: center;
+    background-image: dd;
+    align-items: center;
+    background-image: url(./img/register_bg2.jpg);
+    height: 100vh; /* Make the body fill the viewport height */
+  }
+
+  .register{
+    background-color:rgb(243, 243, 243,0.7);
+    width: 400px;
+    height: 500px;
+    box-shadow: 0 14px 18px 0 rgba(0, 0, 0, 0.2), 0 16px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    box-sizing: border-box;
+    align-content: center;
+    border: 1px solid $primary_color;
+    border-radius: 20px;
+    
+  }
+  .button_border{
+    padding: 5px 100px;
+    background-color: white; 
+    color: black; 
+    text-decoration: none;
+    text-align: center;
+    transition-duration: $motion_effect;
+    border: 2px solid $primary_color;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+  .button_border:hover {
+    background-color: $primary_color;
+    color: white;
+  }
+
+  .input_register{
+    width: 300px;
+    height: 35px;
+    padding:1px;
+    border-radius: 5px;
+    padding-left: 5px;
+    border: $primary_color solid 1px ;
+    margin-top: 20px;
+  }
+  .input_register:focus{
+    border: tomato solid 1px ;
+
+  }
+
+
+  .text_title_login{
+    color: $primary_color;
+    text-shadow: 2px 2px 5px rgb(60, 160, 57);
+    font-size: 27px;
+    margin-bottom: 10px;
+  }
+  .text_title_register{
+    margin-bottom: 50px;
+  }
+  .link{
+    color: $primary_color;
+    text-decoration: none;
+    transition-duration:$motion_effect ;
+    padding-top:10px;
+  }
+  .link:hover{
+    color:tomato;
+  }
+
+  .img_logo{
+    width: 120px;
+    height: 120px;
+    transition-duration: $motion_effect;
+    border-radius:  60px;
+
+  }
+  .img_logo:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
