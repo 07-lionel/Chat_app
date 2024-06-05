@@ -3,18 +3,19 @@ import React ,{useState} from 'react'
 import userimg from '../../img/logo.png'
 const Login = () =>{
     const [user,setUser] = useState({
-        name:"",
+        email:"",
         password:""
     })
 
     const handleChange=(e)=>{
-        const [name,value]=e.target
-       setUser({...user,[name]:value}) 
+        const {name,value}=e.target
+        setUser({...user,[name]:value}) 
     }
     const login =()=>{
-
-        axios.post('http:/localhost:6969/login',user)
-
+        axios.post('http:/localhost:6969/Login',user)
+        .then(res=>{
+            alert(res.data.message)
+        })
     }
     return(
         <>
@@ -28,10 +29,10 @@ const Login = () =>{
             <div>
                 <form action="#" autoComplete="off">
                     <div class="">
-                            <input type="text" id="sign-in-email" class=" input_register" name="email" value={user.email}  onChange={handleChange} placeholder="Your email"/>
+                        <input type="text" id="sign-in-email" class=" input_register" name="email" value={user.email}  onChange={handleChange} placeholder="Your email"/>
                     </div>
                    <div class="">
-                           <input type="password" id="sign-in-email" class="input_register " name="password" value={user.password}  onChange={handleChange} placeholder="Your password"/>
+                        <input type="password" id="sign-in-email" class="input_register " name="password" value={user.password}  onChange={handleChange} placeholder="Your password"/>
                    </div>
                    <div class="">
                        <div class="">
@@ -48,7 +49,7 @@ const Login = () =>{
                </form>
            </div>
            <div class="flex items-center justify-center mt-6">
-               <a href="#" target="_blank" class="link" >
+               <a href="/Register" target="" class="link" >
                    <span class="ml-2">
                        You don&#x27;t have an account?
                    </span>

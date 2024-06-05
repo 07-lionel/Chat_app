@@ -1,18 +1,16 @@
-import express from 'express'
-import cors from 'cors'
-import mongoose from 'mongoose'
+const express =require('express')
+const cors =require('cors')
+const mongoose =require('mongoose')
 
 const app=express()
 app.use(express.json())
 app.use(express.urlencoded())
 app.use(cors)
-
-mongoose.connect("mongodb://localhost:27017/auth",{
+const router = express.Router();
+mongoose.connect("mongodb://localhost:30000/mychat",{
     useNewUrlParser:true,
     useUnifiedTopology:true
-});()=>{
-    console.log("connect to DB")
-}
+});
 
 const  userSchema =new mongoose.Schema({
     name:String,
@@ -40,10 +38,10 @@ app.post("/Login",(req,res)=>{
     })
 })
 
-app.post("/Register",(req,res)=>{
+router.get("/Register",(req,res)=>{
     console.log(req.body)
     const {name,email,password}=req.body;
-    User.findone({email:email},(err,user)=>{
+    User.findone({email:email},(err,user)=>{khlhihio
         if(user){
             res.send({message:"user already exit"})
         }
