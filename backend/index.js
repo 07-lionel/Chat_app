@@ -3,14 +3,9 @@ const cors =require('cors')
 const mongoose =require('mongoose')
 
 const app=express()
+app.use(cors())
 app.use(express.json())
-app.use(express.urlencoded())
-app.use(cors)
-const router = express.Router();
-mongoose.connect("mongodb://localhost:30000/mychat",{
-    useNewUrlParser:true,
-    useUnifiedTopology:true
-});
+mongoose.connect("mongodb://localhost:30000/mychat");
 
 const  userSchema =new mongoose.Schema({
     name:String,
@@ -18,47 +13,48 @@ const  userSchema =new mongoose.Schema({
     password:String
 })
 
-const User= new mongoose.model("User",userSchema)
+const UserForm= new mongoose.model("User",userSchema)
 
-app.post("/Login",(req,res)=>{
+app.post("/login",(req,res)=>{
     const {email,password}=req.body;
-    User.findone({email:email},(err,user)=>{
+
+    UserForm.findOne({email: email})
+    .then(user => {
         if(user){
-            if(password==user.password){
-                res.send({message:"login sucess",user:user})
-        
+            // If user found then these 2 cases
+            if(user.password === password) {
+                res.json("Success");
             }
-            else {
-                res.send({message:"wrong credentials"})
+            else{
+                res.json("Wrong password");
             }
         }
+        // If user not found then 
         else{
-            res.send("not register")
+            res.json("No records found! ");
         }
     })
+    .catch(err=>res.json(err))
+
 })
 
-router.get("/Register",(req,res)=>{
-    console.log(req.body)
+app.post("/register",(req,res)=>{
     const {name,email,password}=req.body;
-    User.findone({email:email},(err,user)=>{khlhihio
+
+    UserForm.findOne({email:email})
+    .then(user => {
         if(user){
-            res.send({message:"user already exit"})
+            res.json("Already registered")
         }
-        else{
-            const user =new User({name,email,password})
-            user.save(err=>{
-                if(err){
-                    res.send(err)
-                }
-                else{
-                    res.send({message:"sucessfull"})
-                }
-            })
+        else {
+            UserForm.create(req.body)
+            .then(result=>res.json(result))
+            .catch(err=>res.json(err))
         }
     })
 })
 
-app.listen(6969,()=>{
-    console.log("started")
-})
+app.listen(6969, () => {
+    console.log("Server listining on http://127.0.0.1:6969");
+
+});
